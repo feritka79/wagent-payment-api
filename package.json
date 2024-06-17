@@ -3,11 +3,11 @@
   "name": "wagent-api",
   "version": "0.1.0",
   "description": "The wagent api",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
-    "dev:start": "nodemon --exec ts-node src/index.ts",
+    "dev:start": "nodemon --exec node dist/index.js",
     "dev:build": "tsc --watch",
     "dev": "npm-run-all --parallel dev:build dev:start",
     "lint": "eslint . --ext .ts"
@@ -34,7 +34,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "nodemon": "^3.1.2",
     "ts-node": "^10.9.2",
-    "tsc": "^2.0.4",
     "typescript": "^5.4.5"
   },
   "dependencies": {
