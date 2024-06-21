@@ -2,7 +2,6 @@ import express from "express";
 
 import getEnvs from "./env";
 import connectDb from "./config/connectDb";
-import userRoutes from "./routes/userRoutes";
 
 
 const app = express();
@@ -15,9 +14,9 @@ connectDb(DB_URI, DB_NAME)
             res.send('Connected to database');
         });
 
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+        const port = PORT || 5000;
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
         });
     })
     .catch(err => {
@@ -26,5 +25,3 @@ connectDb(DB_URI, DB_NAME)
 
 
 const {PORT} = getEnvs();
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
