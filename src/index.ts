@@ -24,8 +24,6 @@ connectDb(DB_URI, DB_NAME)
         console.error('Failed to connect to the database:', err);
     });
 
-app.use(express.json());
-app.use("/users", userRoutes);
 
 const {PORT} = getEnvs();
 
