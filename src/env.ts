@@ -9,8 +9,7 @@ const getEnvs = () => {
         'EMAIL_HOST',
         'EMAIL_PORT',
     ];
-    const envValues = enforceEnv(envVariables, {returnValues: true});
-    return envValues;
+    return enforceEnv(envVariables, {returnValues: true});
 
 };
 export default getEnvs;
