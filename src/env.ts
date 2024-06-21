@@ -1,7 +1,7 @@
 import enforceEnv from 'envil';
 
-const checkEnvs = ()=>{
-    const envs=[
+const getEnvs = () => {
+    const envVariables = [
         'DB_URI',
         'DB_NAME',
         'PORT',
@@ -9,7 +9,8 @@ const checkEnvs = ()=>{
         'EMAIL_HOST',
         'EMAIL_PORT',
     ];
-    enforceEnv(envs)
+    const envValues = enforceEnv(envVariables, {returnValues: true});
+    return envValues;
 
 };
-export default checkEnvs;
+export default getEnvs;
