@@ -6,22 +6,16 @@ import connectDb from "./config/connectDb";
 
 const app = express();
 
-const { DB_URI, DB_NAME } = getEnvs();
+const {DB_URI, DB_NAME, PORT} = getEnvs();
 
 connectDb(DB_URI, DB_NAME)
     .then(() => {
-        app.get('/a', (req, res) => {
-            res.send('Connected to database');
-        });
+        console.log('Connected to the database');
 
-        const port = PORT || 5000;
-        app.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
         });
     })
     .catch(err => {
         console.error('Failed to connect to the database:', err);
     });
-
-
-const {PORT} = getEnvs();
