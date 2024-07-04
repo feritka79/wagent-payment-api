@@ -1,8 +1,7 @@
 import express from "express";
 
-import getEnvs from "./getEnvs";
+import getEnvs from "./config/getEnvs";
 import connectDb from "./config/connectDb";
-
 
 const app = express();
 
