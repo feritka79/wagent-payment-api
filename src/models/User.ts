@@ -1,10 +1,11 @@
 import { Document, Schema, model } from 'mongoose';
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
 export interface IUser extends Document {
     email: string;
     password: string;
     storeName: string;
+    storeImage: string;
     confirmPassword: (enteredPassword: string) => Promise<boolean>;
 }
 
@@ -19,6 +20,10 @@ const userSchema = new Schema<IUser>({
         unique: true,
     },
     password: {
+        type: String,
+        required: true,
+    },
+    storeImage: {
         type: String,
         required: true,
     },
