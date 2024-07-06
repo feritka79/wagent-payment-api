@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const token = (req.header('Authorization') as string)?.replace('Bearer ', '');
 
     if (!token) {
@@ -16,3 +16,4 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
         res.status(401).json({ error: { message: 'Token is not valid', code: 401 } });
     }
 };
+export default authMiddleware;
