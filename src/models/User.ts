@@ -1,5 +1,5 @@
-import { Document, Schema, model } from 'mongoose';
-import { hashPassword, comparePassword } from '../utils/passwordHash';
+import {Document, Schema, model} from 'mongoose';
+import {hashPassword, comparePassword} from '../utils/hashAndComparePassword';
 
 export interface IUser extends Document {
     email: string;
@@ -27,22 +27,19 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: true,
     },
-}, { timestamps: true });
+}, {timestamps: true});
 
 userSchema.pre<IUser>('save', async function (next) {
     if (!this.isModified('password')) {
         return next();
     }
-    try {
-        this.password = await hashPassword(this.password);
-        next();
-    } catch (error) {
-        next(error);
-    }
+    this.password = await hashPassword(this.password);
+    next();
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword: string): Promise<boolean> {
-    return await comparePassword(enteredPassword, this.password);
+    const isValid = comparePassword(enteredPassword, this.password);
+    return isValid
 };
 
 const User = model<IUser>('User', userSchema);
