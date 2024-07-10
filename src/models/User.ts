@@ -1,5 +1,5 @@
-import { Document, Schema, model } from 'mongoose';
-import bcrypt from 'bcryptjs';
+import {Document, Schema, model} from 'mongoose';
+import {hashPassword, comparePassword} from '../utils/hashAndComparePassword';
 
 export interface IUser extends Document {
     email: string;
@@ -27,10 +27,19 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: true,
     },
-}, { timestamps: true });
+}, {timestamps: true});
 
-userSchema.methods.matchPassword = async function (enteredPassword: string) {
-    return await bcrypt.compare(enteredPassword, this.password);
+userSchema.pre<IUser>('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+    this.password = await hashPassword(this.password);
+    next();
+});
+
+userSchema.methods.matchPassword = async function (enteredPassword: string): Promise<boolean> {
+    const isValid = comparePassword(enteredPassword, this.password);
+    return isValid
 };
 
 const User = model<IUser>('User', userSchema);
