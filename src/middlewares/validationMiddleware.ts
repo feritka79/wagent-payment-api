@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
+import {validateEmail, validatePassword} from "../utils/validators";
 
 const userSchema = z.object({
     storeName: z.string().min(1, 'Store name is required'),
-    email: z.string().email('Enter a valid email'),
-    password: z.string().min(8, 'Password must be at least 8 characters long'),
+    email: z.string().refine(validateEmail,'Enter a valid email'),
+    password: z.string().refine(validatePassword, 'Password must be at least 8 characters long'),
     storeImage: z.string().min(1, 'Store image is required'),
 });
 
