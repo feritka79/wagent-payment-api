@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import { User } from '../models/User';
 import { sendRegistrationEmail } from '../utils/emailService';
 import { validateUser } from '../middlewares/validationMiddleware';
