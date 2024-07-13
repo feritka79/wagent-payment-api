@@ -10,7 +10,7 @@ const userSchema = z.object({
     storeImage: z.string().min(1, 'Store image is required'),
 });
 
-export const validateUser = (req: Request, res: Response, next: NextFunction) => {
+export const registerValidationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const result = userSchema.safeParse(req.body);
 
     if (!result.success) {

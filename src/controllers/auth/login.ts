@@ -3,6 +3,7 @@ import {Request, Response} from "express";
 import {generateToken} from '../../utils/generateToken';
 import { User } from '../../models/User';
 
+
 export const loginUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
@@ -19,6 +20,7 @@ export const loginUser = async (req: Request, res: Response) => {
                 id: user.id,
                 email: user.email,
                 storeName: user.storeName,
+                storeImage: user.storeImage,
                 token,
             },
         });

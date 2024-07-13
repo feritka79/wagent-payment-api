@@ -2,12 +2,12 @@ import { Request, Response } from 'express';
 
 import { User } from '../../models/User';
 import { sendRegistrationEmail } from '../../utils/emailService';
-import { validateUser } from '../../middlewares/validationMiddleware';
+import { registerValidation } from '../../middlewares/registerValidationMiddleware';
 import {generateToken} from '../../utils/generateToken';
 
 
 export const registerUser = [
-    validateUser,
+    registerValidation,
     async (req: Request, res: Response) => {
         const { storeName, email, password } = req.body;
 
