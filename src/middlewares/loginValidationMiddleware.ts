@@ -8,7 +8,7 @@ const loginSchema = z.object({
     password: z.string().refine(validatePassword, 'Password must be at least 8 characters long'),
 });
 
-export const loginValidationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const loginValidationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const result = loginSchema.safeParse(req.body);
 
     if (!result.success) {
@@ -22,3 +22,5 @@ export const loginValidationMiddleware = (req: Request, res: Response, next: Nex
     req.body = result.data;
     next();
 };
+
+export default loginValidationMiddleware;

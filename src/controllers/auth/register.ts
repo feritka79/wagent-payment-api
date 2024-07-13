@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 
 import { User } from '../../models/User';
 import { sendRegistrationEmail } from '../../utils/emailService';
-import { registerValidation } from '../../middlewares/registerValidationMiddleware';
-import {generateToken} from '../../utils/generateToken';
+import  registerValidation  from '../../middlewares/registerValidationMiddleware';
+import generateToken from '../../utils/generateToken';
 
 
 export const registerUser = [
