@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
+
 import {validateEmail, validatePassword} from "../utils/validators";
 
 const userSchema = z.object({
